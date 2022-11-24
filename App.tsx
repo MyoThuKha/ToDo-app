@@ -16,35 +16,35 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ExpoBar style="auto" />
+
+      {/* App bar*/}
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.today}>Today</Text>
+          <Text style={styles.date}>Friday, Oct 8</Text>
+        </View>
+        <View style={styles.profile}></View>
+      </View>
+
+      {/* greeting */}
       <View style={styles.section1}>
-        {/* time and account */}
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.today}>Today</Text>
-            <Text style={styles.date}>Friday, Oct 8</Text>
-          </View>
-          <View style={styles.profile}></View>
+        <View style={styles.greet}>
+          <Text style={styles.mainText}>
+            rise and{"\n"}shine, {name}!{"\n"}how are you feeling{"\n"}today?
+          </Text>
+          <TouchableOpacity style={styles.goTo}></TouchableOpacity>
         </View>
 
-        {/* greeting */}
-        <View style={styles.middle}>
-          <View style={styles.greet}>
-            <Text style={styles.mainText}>
-              rise and{"\n"}shine, {name}!{"\n"}how are you feeling{"\n"}today?
-            </Text>
-          </View>
+        <View style={styles.btnSection}>
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btnText}>add new text</Text>
+          </TouchableOpacity>
 
-          <View style={styles.btnSection}>
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.btnText}>add new text</Text>
-            </TouchableOpacity>
+          <View style={styles.verticleLine}></View>
 
-            <View style={styles.verticleLine}></View>
-
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.btnText}>Work mode</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btnText}>Work mode</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -61,11 +61,9 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: background(),
   },
-  section1: {
-    flex: 5,
-  },
 
   //------------------------
+  // App Bar
   header: {
     paddingHorizontal: 24,
     borderBottomColor: foreground(),
@@ -90,12 +88,16 @@ const styles = StyleSheet.create({
   },
 
   //------------------------
-  middle: {
-    paddingVertical: 24,
+  section1: {
+    justifyContent: "space-between",
     flex: 1,
   },
+
+  //-----------------------
   greet: {
     flex: 1,
+    justifyContent: "center",
+    position: "relative",
   },
   mainText: {
     color: foreground(),
@@ -104,6 +106,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 
+  goTo: {},
+
+  //------------------------
   //Buttons
   btnSection: {
     borderTopColor: foreground(),

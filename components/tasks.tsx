@@ -19,7 +19,7 @@ export default Tasks;
 
 const styles = StyleSheet.create({
   section2: {
-    flex: 4,
+    flex: 1,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
