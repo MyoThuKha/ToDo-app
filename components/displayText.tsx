@@ -6,7 +6,7 @@ interface displayTextProps {
   style: {};
 }
 
-const Display: React.FC<displayTextProps> = ({ children, style }) => {
+const Display: React.FC<displayTextProps> = ({ children, style = {} }) => {
   return <Text style={[{ fontFamily: "display" }, style]}>{children}</Text>;
 };
 export default Display;

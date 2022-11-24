@@ -60,7 +60,7 @@ const Home = () => {
       </View>
 
       {/* tasks */}
-      <Tasks foreground={foreground} />
+      <Tasks foreground={foreground} background={background} />
     </>
   );
 };
