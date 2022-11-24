@@ -19,8 +19,11 @@ export default function App() {
       <View style={styles.section1}>
         {/* time and account */}
         <View style={styles.header}>
-          <Text style={styles.text}>Today</Text>
-          <Text style={styles.date}>Friday, Oct 8</Text>
+          <View>
+            <Text style={styles.today}>Today</Text>
+            <Text style={styles.date}>Friday, Oct 8</Text>
+          </View>
+          <View style={styles.profile}></View>
         </View>
 
         {/* greeting */}
@@ -61,13 +64,17 @@ const styles = StyleSheet.create({
   section1: {
     flex: 5,
   },
+
+  //------------------------
   header: {
     paddingHorizontal: 24,
     borderBottomColor: foreground(),
     borderBottomWidth: 1,
     paddingBottom: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  text: {
+  today: {
     color: foreground(),
     fontSize: 20,
   },
@@ -75,7 +82,14 @@ const styles = StyleSheet.create({
     color: foreground(),
     fontSize: 15,
   },
+  profile: {
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    backgroundColor: foreground(),
+  },
 
+  //------------------------
   middle: {
     paddingVertical: 24,
     flex: 1,
@@ -89,6 +103,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     textTransform: "uppercase",
   },
+
+  //Buttons
   btnSection: {
     borderTopColor: foreground(),
     borderTopWidth: 1,
