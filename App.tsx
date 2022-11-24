@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { StatusBar as ExpoBar } from "expo-status-bar";
 import { useState } from "react";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import Tasks from "./components/tasks";
 
 const background = (): string => {
@@ -32,18 +33,30 @@ export default function App() {
           <Text style={styles.mainText}>
             rise and{"\n"}shine, {name}!{"\n"}how are you feeling{"\n"}today?
           </Text>
-          <TouchableOpacity style={styles.goTo}></TouchableOpacity>
+          <TouchableOpacity style={styles.goTo}>
+            <AntDesign name="arrowright" size={24} color="black" />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.btnSection}>
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnText}>add new text</Text>
+            <View style={styles.btnContent}>
+              <AntDesign name="plus" size={24} color={foreground()} />
+              <Text style={styles.btnText}>add new text</Text>
+            </View>
           </TouchableOpacity>
 
           <View style={styles.verticleLine}></View>
 
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnText}>Work mode</Text>
+            <View style={styles.btnContent}>
+              <MaterialIcons
+                name="work-outline"
+                size={24}
+                color={foreground()}
+              />
+              <Text style={styles.btnText}>Work mode</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -101,12 +114,22 @@ const styles = StyleSheet.create({
   },
   mainText: {
     color: foreground(),
-    fontSize: 40,
+    fontSize: 35,
     paddingHorizontal: 24,
     textTransform: "uppercase",
   },
 
-  goTo: {},
+  goTo: {
+    backgroundColor: foreground(),
+    width: 69,
+    height: 50,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 20,
+    right: 24,
+  },
 
   //------------------------
   //Buttons
@@ -119,11 +142,17 @@ const styles = StyleSheet.create({
   },
   btn: {
     flex: 1,
-    textTransform: "capitalize",
+    alignItems: "center",
   },
+  btnContent: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   btnText: {
     color: foreground(),
-    textAlign: "center",
+    textTransform: "capitalize",
+    paddingLeft: 5,
   },
   verticleLine: {
     height: "100%",

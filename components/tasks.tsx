@@ -9,7 +9,7 @@ interface tasksProps {
 const Tasks: React.FC<tasksProps> = ({ foreground }) => {
   return (
     <View style={[styles.section2, { backgroundColor: foreground() }]}>
-      <Text>Your Routine</Text>
+      <Text style={styles.title}>Your Routine</Text>
       <Text>Drink 1 glass of water</Text>
       <Text>Meditate for 10 mins</Text>
     </View>
@@ -19,8 +19,13 @@ export default Tasks;
 
 const styles = StyleSheet.create({
   section2: {
+    paddingHorizontal: 20,
+    paddingVertical: 5,
     flex: 1,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+  },
+  title: {
+    fontSize: 28,
   },
 });
