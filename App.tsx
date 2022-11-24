@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { StatusBar as ExpoBar } from "expo-status-bar";
 import { useState } from "react";
+import Tasks from "./components/tasks";
 
 const background = (): string => {
   return "black";
@@ -23,24 +24,29 @@ export default function App() {
         </View>
 
         {/* greeting */}
-        <View style={styles.greet}>
-          <Text style={styles.mainText}>
-            rise and{"\n"}shine, {name}!{"\n"}how are you feeling{"\n"}today?
-          </Text>
-          <View style={styles.btns}>
-            <Text style={styles.btn}>add new text</Text>
+        <View style={styles.middle}>
+          <View style={styles.greet}>
+            <Text style={styles.mainText}>
+              rise and{"\n"}shine, {name}!{"\n"}how are you feeling{"\n"}today?
+            </Text>
+          </View>
+
+          <View style={styles.btnSection}>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>add new text</Text>
+            </TouchableOpacity>
+
             <View style={styles.verticleLine}></View>
-            <Text style={styles.btn}>Work mode</Text>
+
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>Work mode</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
 
       {/* tasks */}
-      <View style={styles.section2}>
-        <Text>Your Routine</Text>
-        <Text>Drink 1 glass of water</Text>
-        <Text>Meditate for 10 mins</Text>
-      </View>
+      <Tasks foreground={foreground} />
     </View>
   );
 }
@@ -70,8 +76,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
-  greet: {
+  middle: {
     paddingVertical: 24,
+    flex: 1,
+  },
+  greet: {
+    flex: 1,
   },
   mainText: {
     color: foreground(),
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     textTransform: "uppercase",
   },
-  btns: {
+  btnSection: {
     borderTopColor: foreground(),
     borderTopWidth: 1,
     flexDirection: "row",
@@ -87,22 +97,16 @@ const styles = StyleSheet.create({
     height: 72,
   },
   btn: {
-    color: foreground(),
     flex: 1,
-    textAlign: "center",
     textTransform: "capitalize",
+  },
+  btnText: {
+    color: foreground(),
+    textAlign: "center",
   },
   verticleLine: {
     height: "100%",
     width: 1,
     backgroundColor: foreground(),
-  },
-
-  //
-  section2: {
-    flex: 4,
-    backgroundColor: foreground(),
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
   },
 });
