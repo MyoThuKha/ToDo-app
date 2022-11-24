@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   section2: {
     paddingHorizontal: 20,
     paddingVertical: 5,
-    flex: 1,
+    flex: 4,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
