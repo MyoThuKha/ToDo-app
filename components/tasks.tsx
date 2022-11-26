@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Display from "./displayText";
+import globalStyle from "../styles/global";
 
 interface tasksProps {
   foreground: () => string;
@@ -30,19 +30,27 @@ const Tasks: React.FC<tasksProps> = ({ foreground, background }) => {
   ];
   return (
     <View style={[styles.section2, { backgroundColor: foreground() }]}>
-      <Display style={styles.title}>Your Routine</Display>
+      <Text style={{ ...globalStyle.display, ...styles.title }}>
+        Your Routine
+      </Text>
+      <View style={styles.total}>
+        <Text style={{ borderRightColor: foreground(), borderRightWidth: 1 }}>
+          {data.length} Tasks
+        </Text>
+        <Text>Morning</Text>
+      </View>
       <FlatList
         data={data}
         renderItem={({ item }) => {
           return (
             <View style={styles.item}>
-              <Text>{item.text}</Text>
+              <Text style={globalStyle.display}>{item.text}</Text>
               <TouchableOpacity
                 style={[styles.done, { backgroundColor: background() }]}
               >
-                <Display style={{ color: foreground(), fontSize: 12 }}>
+                <Text style={{ color: foreground(), fontSize: 12 }}>
                   Mark as done
-                </Display>
+                </Text>
               </TouchableOpacity>
             </View>
           );
@@ -63,8 +71,19 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: "bold",
   },
+
+  total: {
+    marginVertical: 15,
+    borderColor: "#d1d1d1",
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
+    width: 182,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
   item: {
     paddingVertical: 32,
     borderBottomColor: "#d1d1d1",

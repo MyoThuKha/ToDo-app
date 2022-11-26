@@ -1,0 +1,16 @@
+data scheme
+
+{
+    text: "",
+    id: "",
+    time: "",
+}
+
+
+
+user scheme
+{
+    name: "",
+    profile: "",
+    mode: "",
+}

@@ -2,8 +2,10 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import Tasks from "../components/tasks";
-import { useState } from "react";
-import Display from "../components/displayText";
+import { useCallback, useState } from "react";
+import globalStyle from "../styles/global";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
 
 const background = (): string => {
   // return "#f2eee9";
@@ -12,14 +14,27 @@ const background = (): string => {
 const foreground = () => {
   return background() === "#f2eee9" ? "black" : "white";
 };
+
+SplashScreen.preventAutoHideAsync();
+
 const Home = () => {
+  const [fontsLoaded] = useFonts({
+    display: require("../assets/fonts/main-font.otf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) await SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
   const [username, setusername] = useState("Bella");
+
+  if (!fontsLoaded) return null;
   return (
-    <>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.header}>
         <View>
-          <Display style={styles.today}>Today</Display>
-          <Display style={styles.date}>Friday, Oct 8</Display>
+          <Text style={[globalStyle.display, styles.today]}>Today</Text>
+          <Text style={[globalStyle.display, styles.date]}>Friday, Oct 8</Text>
         </View>
         <View style={styles.profile}></View>
       </View>
@@ -27,10 +42,10 @@ const Home = () => {
       {/* greeting */}
       <View style={styles.section1}>
         <View style={styles.greet}>
-          <Display style={styles.mainText}>
+          <Text style={[globalStyle.display, styles.mainText]}>
             rise and{"\n"}shine, {username}!{"\n"}how are you feeling{"\n"}
             today?
-          </Display>
+          </Text>
           <TouchableOpacity style={styles.goTo}>
             <AntDesign name="arrowright" size={24} color={background()} />
           </TouchableOpacity>
@@ -61,7 +76,7 @@ const Home = () => {
 
       {/* tasks */}
       <Tasks foreground={foreground} background={background} />
-    </>
+    </View>
   );
 };
 
