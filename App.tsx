@@ -1,8 +1,11 @@
-import * as SplashScreen from "expo-splash-screen";
+import { Provider } from "react-redux";
 import Routing from "./navigation/routes";
-import Home from "./pages/home";
-SplashScreen.preventAutoHideAsync();
+import store from "./datas/provider";
 
 export default function App() {
-  return <Routing />;
+  return (
+    <Provider store={store}>
+      <Routing />;
+    </Provider>
+  );
 }

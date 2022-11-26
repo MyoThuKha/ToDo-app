@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSelector } from "react-redux";
 import globalStyle from "../styles/global";
 
 interface tasksProps {
@@ -14,20 +15,8 @@ interface tasksProps {
 }
 
 const Tasks: React.FC<tasksProps> = ({ foreground, background }) => {
-  const data = [
-    { text: "drink 1 glass of water", key: "0" },
-    { text: "Meditate for 10 mins", key: "1" },
-    { text: "drink 1 glass of water", key: "2" },
-    { text: "Meditate for 10 mins", key: "3" },
-    { text: "drink 1 glass of water", key: "4" },
-    { text: "drink 1 glass of water", key: "5" },
-    { text: "drink 1 glass of water", key: "6" },
-    { text: "Meditate for 10 mins", key: "7" },
-    { text: "Meditate for 10 mins", key: "8" },
-    { text: "Meditate for 10 mins", key: "9" },
-    { text: "drink 1 glass of water", key: "10" },
-    { text: "Meditate for 10 mins hey", key: "11" },
-  ];
+  const data = useSelector((state: any) => state.tasks.data);
+
   return (
     <View style={[styles.section2, { backgroundColor: foreground() }]}>
       <Text style={{ ...globalStyle.display, ...styles.title }}>
