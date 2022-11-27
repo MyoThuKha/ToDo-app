@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTask } from "../datas/reducer";
 import globalStyle from "../styles/global";
 
 interface tasksProps {
@@ -16,6 +17,7 @@ interface tasksProps {
 
 const Tasks: React.FC<tasksProps> = ({ foreground, background }) => {
   const data = useSelector((state: any) => state.tasks.data);
+  const dispatch = useDispatch();
 
   return (
     <View style={[styles.section2, { backgroundColor: foreground() }]}>
@@ -36,6 +38,7 @@ const Tasks: React.FC<tasksProps> = ({ foreground, background }) => {
               <Text style={globalStyle.display}>{item.text}</Text>
               <TouchableOpacity
                 style={[styles.done, { backgroundColor: background() }]}
+                onPress={() => dispatch(deleteTask(item.key))}
               >
                 <Text style={{ color: foreground(), fontSize: 12 }}>
                   Mark as done

@@ -25,8 +25,9 @@ const tasksReducer = createSlice({
       state.data.push(item);
     },
     deleteTask: (state, action) => {
-      const index = action.payload;
-      state.data.splice(index, 1);
+      const key = action.payload;
+      const result = state.data.filter((each) => each.key !== key);
+      state.data = result;
     },
   },
 });

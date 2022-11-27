@@ -17,7 +17,7 @@ const foreground = () => {
 
 SplashScreen.preventAutoHideAsync();
 
-const Home = () => {
+const Home = ({ navigation }: { navigation: any }) => {
   const [fontsLoaded] = useFonts({
     display: require("../assets/fonts/main-font.otf"),
   });
@@ -51,8 +51,12 @@ const Home = () => {
           </TouchableOpacity>
         </View>
 
+        {/* Two buttons */}
         <View style={styles.btnSection}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate("create")}
+          >
             <View style={styles.btnContent}>
               <AntDesign name="plus" size={24} color={foreground()} />
               <Text style={styles.btnText}>add new text</Text>
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: StatusBar.currentHeight,
     flex: 1,
-    height: "100%",
+    // height: "100%",
     backgroundColor: background(),
   },
 
