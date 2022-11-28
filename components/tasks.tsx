@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -18,6 +19,14 @@ const Tasks: React.FC<tasksProps> = ({}) => {
   const background = useSelector((state: any) => state.user.background);
   const dispatch = useDispatch();
 
+  const [time, setTime] = useState("all");
+  const changeTime = () => {
+    const times = ["all", "morning", "afternoon", "evening", "night"];
+    const curr = times.indexOf(time);
+    if (curr === times.length - 1) setTime(times[0]);
+    else setTime(times[curr + 1]);
+  };
+
   return (
     <View style={[styles.section2, { backgroundColor: foreground }]}>
       <Text style={{ ...globalStyle.display, ...styles.title }}>
@@ -27,7 +36,11 @@ const Tasks: React.FC<tasksProps> = ({}) => {
         <Text style={{ borderRightColor: foreground, borderRightWidth: 1 }}>
           {data.length} Tasks
         </Text>
-        <Text>Morning</Text>
+        <TouchableOpacity onPress={() => changeTime()}>
+          <Text style={{ textTransform: "capitalize", paddingRight: 8 }}>
+            {time}
+          </Text>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={data}
