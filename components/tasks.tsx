@@ -14,12 +14,16 @@ import globalStyle from "../styles/global";
 interface tasksProps {}
 
 const Tasks: React.FC<tasksProps> = ({}) => {
-  const data = useSelector((state: any) => state.tasks.data);
+  const data: [] = useSelector((state: any) => state.tasks.data);
   const foreground = useSelector((state: any) => state.user.foreground);
   const background = useSelector((state: any) => state.user.background);
   const dispatch = useDispatch();
 
   const [time, setTime] = useState("all");
+
+  const tasks =
+    time === "all" ? data : data.filter((each: any) => each.time === time);
+
   const changeTime = () => {
     const times = ["all", "morning", "afternoon", "evening", "night"];
     const curr = times.indexOf(time);
@@ -34,7 +38,7 @@ const Tasks: React.FC<tasksProps> = ({}) => {
       </Text>
       <View style={styles.total}>
         <Text style={{ borderRightColor: foreground, borderRightWidth: 1 }}>
-          {data.length} Tasks
+          {tasks.length} Tasks
         </Text>
         <TouchableOpacity onPress={() => changeTime()}>
           <Text style={{ textTransform: "capitalize", paddingRight: 8 }}>
@@ -43,7 +47,7 @@ const Tasks: React.FC<tasksProps> = ({}) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={data}
+        data={tasks}
         renderItem={({ item }) => {
           return (
             <View style={styles.item}>
