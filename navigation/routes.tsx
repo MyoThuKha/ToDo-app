@@ -7,15 +7,15 @@ import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 const Routing = () => {
   const [fontsLoaded] = useFonts({
     display: require("../assets/fonts/main-font.otf"),
   });
-  const onLayoutView = useCallback(async () => {
-    if (fontsLoaded) await SplashScreen.hideAsync();
-  }, [fontsLoaded]);
+  // useCallback(async () => {
+  //   if (fontsLoaded) await SplashScreen.hideAsync();
+  // }, [fontsLoaded]);
   if (!fontsLoaded) return null;
   return (
     <NavigationContainer>

@@ -7,7 +7,7 @@ import globalStyle from "../styles/global";
 interface greetProps {}
 
 const Greet: React.FC<greetProps> = ({}) => {
-  const username: string = useSelector((state: any) => state.user.name);
+  const username: string = useSelector((state: any) => state.user.firstname);
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
 

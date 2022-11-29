@@ -10,15 +10,13 @@ import {
 } from "react-native";
 import { StatusBar } from "react-native";
 import { useEffect, useState, useRef } from "react";
-import * as SplashScreen from "expo-splash-screen";
 import { useDispatch, useSelector } from "react-redux";
 import { updateName } from "../datas/userReducer";
 
 // return "#f2eee9";
 
-SplashScreen.preventAutoHideAsync();
 const Intro = ({ navigation }: { navigation: any }) => {
-  const username: string = useSelector((state: any) => state.user.name);
+  const username: string = useSelector((state: any) => state.user.firstname);
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
 
@@ -97,8 +95,8 @@ const Intro = ({ navigation }: { navigation: any }) => {
               setError(false);
               dispatch(
                 updateName({
-                  firstname: firstname.current,
-                  secondname: secondname.current,
+                  first: firstname.current,
+                  second: secondname.current,
                 })
               );
               navigation.navigate("home");
