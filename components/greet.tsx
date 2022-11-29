@@ -45,7 +45,7 @@ const Greet: React.FC<greetProps> = ({}) => {
 
         <TouchableOpacity style={styles.btn}>
           <View style={styles.btnContent}>
-            <MaterialIcons name="work-outline" size={24} color={foreground} />
+            <MaterialIcons name="laptop" size={24} color={foreground} />
             <Text style={{ ...styles.btnText, color: foreground }}>
               Work mode
             </Text>

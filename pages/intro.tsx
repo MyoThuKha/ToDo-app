@@ -17,8 +17,10 @@ import { updateName } from "../datas/userReducer";
 
 const Intro = ({ navigation }: { navigation: any }) => {
   const username: string = useSelector((state: any) => state.user.firstname);
-  const foreground: string = useSelector((state: any) => state.user.foreground);
-  const background: string = useSelector((state: any) => state.user.background);
+  // const foreground: string = useSelector((state: any) => state.user.foreground);
+  // const background: string = useSelector((state: any) => state.user.background);
+  const foreground = "black";
+  const background = "white";
 
   const dispatch = useDispatch();
 
@@ -41,12 +43,12 @@ const Intro = ({ navigation }: { navigation: any }) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={{ ...styles.container, backgroundColor: foreground }}>
+      <View style={{ ...styles.container, backgroundColor: background }}>
         {/* image */}
         <View style={styles.imageBox}>
           <TouchableOpacity onPress={() => changeIcon()}>
             <Image
-              source={require(`../assets/profile/profile3.png`)}
+              source={require(`../assets/get_start.png`)}
               style={{
                 width: 300,
                 height: 300,
@@ -57,27 +59,27 @@ const Intro = ({ navigation }: { navigation: any }) => {
           {error && <Text style={{ fontSize: 18 }}>Please add your name</Text>}
           {!error && (
             <Text style={{ fontSize: 28, fontFamily: "display" }}>
-              Let get start
+              Let's get started
             </Text>
           )}
         </View>
 
         {/* form */}
         <View>
-          <View style={{ backgroundColor: foreground, ...styles.form }}>
+          <View style={{ ...styles.form, borderColor: foreground }}>
             <Text style={styles.label}>First Name</Text>
             <TextInput
-              style={styles.input}
+              style={{ fontSize: 16, color: foreground }}
               placeholder="Abc"
               onChangeText={(value) => {
                 firstname.current = value;
               }}
             />
           </View>
-          <View style={{ backgroundColor: foreground, ...styles.form }}>
+          <View style={{ ...styles.form, borderColor: foreground }}>
             <Text style={styles.label}>Last Name</Text>
             <TextInput
-              style={styles.input}
+              style={{ fontSize: 16, color: foreground }}
               placeholder="Abc"
               onChangeText={(value) => {
                 secondname.current = value;
@@ -103,8 +105,8 @@ const Intro = ({ navigation }: { navigation: any }) => {
             }
           }}
         >
-          <View style={{ backgroundColor: background, ...styles.btn }}>
-            <Text style={{ color: foreground }}>Next</Text>
+          <View style={{ backgroundColor: foreground, ...styles.btn }}>
+            <Text style={{ color: background }}>Next</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -121,6 +123,7 @@ const styles = StyleSheet.create({
   imageBox: {
     height: 300,
     alignItems: "center",
+    justifyContent: "center",
   },
   label: {
     color: "#a3a3a1",
@@ -130,12 +133,9 @@ const styles = StyleSheet.create({
   form: {
     marginHorizontal: 24,
     paddingVertical: 8,
-    borderBottomColor: "black",
     borderBottomWidth: 1,
   },
-  input: {
-    fontSize: 16,
-  },
+
   btn: {
     marginHorizontal: 24,
     alignItems: "center",
