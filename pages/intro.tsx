@@ -9,10 +9,10 @@ import {
   Keyboard,
 } from "react-native";
 import { StatusBar } from "react-native";
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateName } from "../datas/userReducer";
 
 // return "#f2eee9";
 
@@ -21,6 +21,8 @@ const Intro = ({ navigation }: { navigation: any }) => {
   const username: string = useSelector((state: any) => state.user.name);
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (username !== "") {
@@ -33,29 +35,15 @@ const Intro = ({ navigation }: { navigation: any }) => {
 
   const [error, setError] = useState(false);
 
-  // font load
-  const [fontsLoaded] = useFonts({
-    display: require("../assets/fonts/main-font.otf"),
-  });
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
   const [icon, setIcon] = useState(1);
   const changeIcon = () => {
     if (icon === 5) setIcon(1);
     else setIcon(icon + 1);
   };
 
-  if (!fontsLoaded) return null;
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View
-        style={{ ...styles.container, backgroundColor: foreground }}
-        onLayout={onLayoutRootView}
-      >
+      <View style={{ ...styles.container, backgroundColor: foreground }}>
         {/* image */}
         <View style={styles.imageBox}>
           <TouchableOpacity onPress={() => changeIcon()}>
@@ -100,13 +88,20 @@ const Intro = ({ navigation }: { navigation: any }) => {
           </View>
         </View>
 
+        {/* next */}
         <TouchableOpacity
           onPress={() => {
             if (firstname.current === "" || secondname.current === "") {
               setError(true);
             } else {
               setError(false);
-              console.log(firstname.current, secondname.current);
+              dispatch(
+                updateName({
+                  firstname: firstname.current,
+                  secondname: secondname.current,
+                })
+              );
+              navigation.navigate("home");
             }
           }}
         >
