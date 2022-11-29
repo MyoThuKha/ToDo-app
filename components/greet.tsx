@@ -22,7 +22,7 @@ const Greet: React.FC<greetProps> = ({}) => {
           today?
         </Text>
         <TouchableOpacity
-          style={{ ...styles.goTo, backgroundColor: foreground }}
+          style={{ ...globalStyle.goTo, backgroundColor: foreground }}
         >
           <AntDesign name="arrowright" size={24} color={background} />
         </TouchableOpacity>
@@ -72,16 +72,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     textTransform: "uppercase",
   },
-  goTo: {
-    width: 69,
-    height: 50,
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    bottom: 20,
-    right: 24,
-  },
+
   //Buttons
   btnSection: {
     borderTopWidth: 1,

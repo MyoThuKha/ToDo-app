@@ -1,36 +1,19 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "react-native";
 import Tasks from "../components/tasks";
-import { useCallback, useState } from "react";
 import globalStyle from "../styles/global";
-import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
+
 import { useSelector } from "react-redux";
 import Greet from "../components/greet";
 
 // return "#f2eee9";
 
-SplashScreen.preventAutoHideAsync();
-
-const Home = ({ navigation }: { navigation: any }) => {
+const Home = () => {
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
 
-  // font load
-  const [fontsLoaded] = useFonts({
-    display: require("../assets/fonts/main-font.otf"),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) await SplashScreen.hideAsync();
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) return null;
   return (
-    <View
-      style={{ ...styles.container, backgroundColor: background }}
-      onLayout={onLayoutRootView}
-    >
+    <View style={{ ...styles.container, backgroundColor: background }}>
       {/* app bar */}
       <View style={{ ...styles.header, borderBottomColor: foreground }}>
         <View>

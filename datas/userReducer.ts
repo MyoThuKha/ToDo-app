@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "",
-  profile: "",
+  profile: 1,
   background: "black",
   foreground: "white",
 };

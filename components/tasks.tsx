@@ -48,7 +48,7 @@ const Tasks: React.FC<tasksProps> = ({}) => {
       </View>
       <FlatList
         data={tasks}
-        renderItem={({ item }) => {
+        renderItem={({ item }: { item: { text: string; key: string } }) => {
           return (
             <View style={styles.item}>
               <Text style={globalStyle.display}>{item.text}</Text>
