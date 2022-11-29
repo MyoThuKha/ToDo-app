@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import globalStyle from "../styles/global";
 
-interface greetProps {}
+interface greetProps {
+  create: () => void;
+}
 
-const Greet: React.FC<greetProps> = ({}) => {
+const Greet: React.FC<greetProps> = ({ create }) => {
   const username: string = useSelector((state: any) => state.user.firstname);
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
@@ -30,11 +32,11 @@ const Greet: React.FC<greetProps> = ({}) => {
 
       {/* Add new text and work mode */}
       <View style={{ ...styles.btnSection, borderTopColor: foreground }}>
-        <TouchableOpacity style={styles.btn} onPress={() => {}}>
+        <TouchableOpacity style={styles.btn} onPress={() => create()}>
           <View style={styles.btnContent}>
             <AntDesign name="plus" size={24} color={foreground} />
             <Text style={{ ...styles.btnText, color: foreground }}>
-              add new text
+              add new task
             </Text>
           </View>
         </TouchableOpacity>

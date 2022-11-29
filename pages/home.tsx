@@ -1,36 +1,43 @@
 import { StyleSheet, Text, View } from "react-native";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import { StatusBar } from "react-native";
 import Tasks from "../components/tasks";
 import globalStyle from "../styles/global";
-
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Greet from "../components/greet";
+import CreateTask from "../components/create";
 
 // return "#f2eee9";
 
 const Home = () => {
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
-
+  const [createMode, setCreateMode] = useState(false);
+  const handleCreate = () => setCreateMode(true);
   return (
     <View style={{ ...styles.container, backgroundColor: background }}>
       {/* app bar */}
-      <View style={{ ...styles.header, borderBottomColor: foreground }}>
-        <View>
-          <Text
-            style={[globalStyle.display, styles.today, { color: foreground }]}
-          >
-            Today
-          </Text>
-          <Text
-            style={[globalStyle.display, styles.date, { color: foreground }]}
-          >
-            Friday, Oct 8
-          </Text>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={{ ...styles.header, borderBottomColor: foreground }}>
+          <View>
+            <Text
+              style={[globalStyle.display, styles.today, { color: foreground }]}
+            >
+              Today
+            </Text>
+            <Text
+              style={[globalStyle.display, styles.date, { color: foreground }]}
+            >
+              Friday, Oct 8
+            </Text>
+          </View>
+          {/* <View style={styles.profile}></View> */}
+          {<Text style={{ color: foreground }}>Morning</Text>}
         </View>
-        <View style={styles.profile}></View>
-      </View>
-      <Greet />
+      </TouchableWithoutFeedback>
+      {!createMode && <Greet create={handleCreate} />}
+      {createMode && <CreateTask />}
       <Tasks />
     </View>
   );
@@ -50,6 +57,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   today: {
     fontSize: 20,

@@ -1,11 +1,7 @@
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
   Keyboard,
 } from "react-native";
 import { StatusBar } from "react-native";
