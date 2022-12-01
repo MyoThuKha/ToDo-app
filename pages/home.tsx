@@ -13,6 +13,7 @@ import CreateTask from "../components/create";
 const Home = () => {
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
+
   const [createMode, setCreateMode] = useState(false);
   const handleCreate = () => setCreateMode(true);
   return (
@@ -38,7 +39,7 @@ const Home = () => {
       </TouchableWithoutFeedback>
       {!createMode && <Greet create={handleCreate} />}
       {createMode && <CreateTask />}
-      <Tasks />
+      {!createMode && <Tasks />}
     </View>
   );
 };
