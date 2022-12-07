@@ -21,23 +21,33 @@ const CreateTask: React.FC<createProps> = ({}) => {
 
   return (
     <View style={styles.section1}>
-      <Text style={{ ...styles.title, color: foreground }}>Your Task</Text>
-      <TextInput
-        placeholder="Abc"
-        multiline
-        placeholderTextColor={foreground}
-        style={{ ...styles.input, color: foreground }}
-        onChangeText={(val) => (inputRef.current = val)}
-      />
+      <View style={{ flexDirection: "row" }}>
+        <Text style={{ ...styles.title, color: foreground }}>Your Task</Text>
+      </View>
+
+      {/* input box */}
+      <View style={styles.inputBox}>
+        <TextInput
+          placeholder="Abc"
+          multiline
+          placeholderTextColor={foreground}
+          style={{ ...styles.input, color: foreground }}
+          onChangeText={(val) => (inputRef.current = val)}
+        />
+      </View>
+
+      {/* submit Button */}
       <TouchableOpacity
-        style={{ ...globalStyle.goTo, backgroundColor: foreground }}
+        // style={{ ...globalstyles.btn, backgroundColor: foreground }}
+        style={{ ...styles.btn, borderColor: foreground }}
         onPress={() => {
           if (inputRef.current !== "") {
             dispatch(addTask({ text: inputRef.current, time: "morning" }));
           }
         }}
       >
-        <AntDesign name="plus" size={24} color={background} />
+        {/* <AntDesign name="plus" size={24} color={background} /> */}
+        <Text>Add Task</Text>
       </TouchableOpacity>
     </View>
   );
@@ -50,7 +60,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   title: {
-    fontSize: 50,
+    fontSize: 35,
     ...globalStyle.display,
     paddingVertical: 16,
   },
@@ -58,5 +68,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     ...globalStyle.display,
     paddingHorizontal: 8,
+  },
+  inputBox: {
+    paddingHorizontal: 8,
+    paddingVertical: 12,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: "white",
+  },
+  btn: {
+    paddingVertical: 12,
+    alignItems: "center",
+    borderWidth: 1,
   },
 });
