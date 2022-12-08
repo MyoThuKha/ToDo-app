@@ -20,7 +20,7 @@ const Routing = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="intro"
+        initialRouteName="home"
         screenOptions={{
           headerShown: false,
         }}

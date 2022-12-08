@@ -6,7 +6,7 @@ import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 export default function App() {
   return (
     <Provider store={store}>
-      <ExpoStatusBar style="auto" />
+      <ExpoStatusBar style="dark" />
       <Routing></Routing>
     </Provider>
   );
