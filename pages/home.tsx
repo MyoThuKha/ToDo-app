@@ -7,12 +7,20 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Greet from "../components/greet";
 import CreateTask from "../components/create";
+import moment from "moment";
 
 // return "#f2eee9";
 
 const Home = () => {
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
+  const date = new Date();
+
+  const [day, month, dateOfMonth] = [
+    moment().format("dddd"),
+    moment().format("MMM"),
+    date.getDate(),
+  ];
 
   const [createMode, setCreateMode] = useState(false);
   const handleCreate = () => setCreateMode(true);
@@ -30,11 +38,12 @@ const Home = () => {
             <Text
               style={[globalStyle.display, styles.date, { color: foreground }]}
             >
-              Friday, Oct 8
+              {/* Friday, Oct 8 */}
+              {day + ", " + month + " " + dateOfMonth}
             </Text>
           </View>
           {/* <View style={styles.profile}></View> */}
-          {<Text style={{ color: foreground }}>Morning</Text>}
+          {<Text style={{ color: foreground }}>{moment().format("LT")}</Text>}
         </View>
       </TouchableWithoutFeedback>
       {!createMode && <Greet create={handleCreate} />}
