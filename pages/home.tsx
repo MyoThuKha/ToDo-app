@@ -1,83 +1,118 @@
-import { StyleSheet, Text, View } from "react-native";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import Tasks from "../components/tasks";
-import globalStyle from "../styles/global";
-import { useState } from "react";
 import { useSelector } from "react-redux";
-import Greet from "../components/greet";
-import CreateTask from "../components/create";
-import moment from "moment";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import AppBar from "../components/appBar";
+import globalStyle from "../styles/global";
 
 // return "#f2eee9";
 
-const Home = () => {
+const Home = ({ navigation }: { navigation: any }) => {
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
-  const date = new Date();
-
-  const [day, month, dateOfMonth] = [
-    moment().format("dddd"),
-    moment().format("MMM"),
-    date.getDate(),
-  ];
-
-  const [createMode, setCreateMode] = useState(false);
-  const handleCreate = () => setCreateMode(true);
+  const username: string = useSelector((state: any) => state.user.firstname);
   return (
     <View style={{ ...styles.container, backgroundColor: background }}>
       {/* app bar */}
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={{ ...styles.header, borderBottomColor: foreground }}>
-          <View>
-            <Text
-              style={[globalStyle.display, styles.today, { color: foreground }]}
-            >
-              Today
-            </Text>
-            <Text
-              style={[globalStyle.display, styles.date, { color: foreground }]}
-            >
-              {/* Friday, Oct 8 */}
-              {day + ", " + month + " " + dateOfMonth}
-            </Text>
-          </View>
-          {/* <View style={styles.profile}></View> */}
-          {<Text style={{ color: foreground }}>{moment().format("LT")}</Text>}
+      <AppBar />
+
+      {/* middle Section */}
+      <View style={styles.section1}>
+        <View style={styles.greet}>
+          <Text
+            style={[
+              globalStyle.display,
+              styles.mainText,
+              { color: foreground },
+            ]}
+          >
+            rise and{"\n"}shine, {username}!{"\n"}how are you feeling{"\n"}
+            today?
+          </Text>
+          <TouchableOpacity
+            style={{ ...globalStyle.goTo, backgroundColor: foreground }}
+          >
+            <AntDesign name="arrowright" size={24} color={background} />
+          </TouchableOpacity>
         </View>
-      </TouchableWithoutFeedback>
-      {!createMode && <Greet create={handleCreate} />}
-      {createMode && <CreateTask />}
-      {!createMode && <Tasks />}
+
+        {/* Add new text and work mode */}
+        <View style={{ ...styles.btnSection, borderTopColor: foreground }}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate("create")}
+          >
+            <View style={styles.btnContent}>
+              <AntDesign name="plus" size={24} color={foreground} />
+              <Text style={{ ...styles.btnText, color: foreground }}>
+                add new task
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <View
+            style={{ ...styles.verticleLine, backgroundColor: foreground }}
+          ></View>
+
+          <TouchableOpacity style={styles.btn}>
+            <View style={styles.btnContent}>
+              <MaterialIcons name="laptop" size={24} color={foreground} />
+              <Text style={{ ...styles.btnText, color: foreground }}>
+                Work mode
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <Tasks />
     </View>
   );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: StatusBar.currentHeight,
     flex: 1,
   },
-
-  header: {
-    paddingHorizontal: 24,
-    borderBottomWidth: 1,
-    paddingBottom: 15,
-    flexDirection: "row",
+  section1: {
     justifyContent: "space-between",
+    flex: 5,
+  },
+  greet: {
+    flex: 1,
+    justifyContent: "center",
+    position: "relative",
+  },
+  mainText: {
+    fontSize: 35,
+    paddingHorizontal: 24,
+    textTransform: "uppercase",
+  },
+  //Buttons
+  btnSection: {
+    borderTopWidth: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    height: 72,
+  },
+  btn: {
+    flex: 1,
     alignItems: "center",
   },
-  today: {
-    fontSize: 20,
+  btnContent: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  date: {
-    fontSize: 15,
+  btnText: {
+    textTransform: "capitalize",
+    paddingLeft: 5,
   },
-  profile: {
-    borderRadius: 50,
-    width: 50,
-    height: 50,
+  verticleLine: {
+    height: "100%",
+    width: 1,
   },
 });
+
+export default Home;

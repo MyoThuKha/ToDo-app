@@ -5,6 +5,7 @@ import Home from "../pages/home";
 import Intro from "../pages/intro";
 import { useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import CreateTask from "../pages/create";
 
 const Stack = createNativeStackNavigator();
 // SplashScreen.preventAutoHideAsync();
@@ -20,13 +21,14 @@ const Routing = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="intro"
+        initialRouteName="home"
         screenOptions={{
           headerShown: false,
         }}
       >
         <Stack.Screen name="intro" component={Intro} />
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="create" component={CreateTask} />
       </Stack.Navigator>
     </NavigationContainer>
   );
