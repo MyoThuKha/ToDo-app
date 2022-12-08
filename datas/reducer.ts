@@ -1,33 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   data: [
-    { text: "drink 1 glass of water", time: "morning", key: "0" },
-    { text: "Meditate for 10 mins", time: "night", key: "1" },
-    { text: "sleep 9 pm", time: "night", key: "2" },
-    { text: "buy milk", time: "morning", key: "3" },
-    { text: "read doc", time: "afternoon", key: "4" },
-    { text: "prepare for exam", time: "morning", key: "6" },
-    { text: "code react", time: "night", key: "9" },
+    { text: "drink 1 glass of water", important: false, key: "0" },
+    { text: "Meditate for 10 mins", important: false, key: "1" },
+    { text: "sleep 9 pm", important: true, key: "2" },
+    { text: "buy milk", important: true, key: "3" },
+    { text: "read doc", important: false, key: "4" },
+    { text: "prepare for exam", important: true, key: "6" },
+    { text: "code react", important: false, key: "9" },
   ],
 };
 
 interface itemProp {
-  payload: { text: string; time: string };
+  payload: { text: string; important: boolean };
 }
-interface stateProp {
-  data: itemProp[];
+export interface stateProp {
+  data: {
+    text: string;
+    important: boolean;
+    key: string;
+  }[];
 }
 
 const tasksReducer = createSlice({
   name: "data",
   initialState,
   reducers: {
-    addTask: (state, action: itemProp) => {
+    addTask: (state: stateProp, action: itemProp) => {
       const item = action.payload;
-      // cosnt id = uuid.v4()
-      const result = { ...item, key: "" };
-      state.data.push(result);
+      const id = uuidv4();
+      const result = { ...item, key: id };
+      state.data.unshift(result);
     },
     deleteTask: (state, action: { payload: string }) => {
       const key = action.payload;

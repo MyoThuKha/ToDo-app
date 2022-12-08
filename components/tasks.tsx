@@ -1,34 +1,36 @@
 import React from "react";
-import { useState } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { useState, useMemo } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTask } from "../datas/reducer";
 import globalStyle from "../styles/global";
 
-interface tasksProps {}
+interface dataProps {
+  text: string;
+  important: boolean;
+  key: string;
+}
 
-const Tasks: React.FC<tasksProps> = ({}) => {
-  const data: [] = useSelector((state: any) => state.tasks.data);
+const Tasks: React.FC = ({}) => {
+  const data = useSelector((state: any) => state.tasks.data);
   const foreground = useSelector((state: any) => state.user.foreground);
   const background = useSelector((state: any) => state.user.background);
   const dispatch = useDispatch();
 
-  const [time, setTime] = useState("all");
+  const [current, setCurrent] = useState("all");
 
-  const tasks =
-    time === "all" ? data : data.filter((each: any) => each.time === time);
+  const tasks = useMemo(() => {
+    return current === "all"
+      ? data
+      : data.filter((each: any) => each.important);
+  }, [current, data]);
 
-  const changeTime = () => {
-    const times = ["all", "morning", "afternoon", "evening", "night"];
-    const curr = times.indexOf(time);
-    if (curr === times.length - 1) setTime(times[0]);
-    else setTime(times[curr + 1]);
+  const changeCategory = () => {
+    const local = ["all", "important"];
+    const curr = local.indexOf(current);
+    if (curr === local.length - 1) setCurrent(local[0]);
+    else setCurrent(local[curr + 1]);
   };
 
   return (
@@ -40,9 +42,9 @@ const Tasks: React.FC<tasksProps> = ({}) => {
         <Text style={{ borderRightColor: foreground, borderRightWidth: 1 }}>
           {tasks.length} Tasks
         </Text>
-        <TouchableOpacity onPress={() => changeTime()}>
+        <TouchableOpacity onPress={() => changeCategory()}>
           <Text style={{ textTransform: "capitalize", paddingRight: 8 }}>
-            {time}
+            {current}
           </Text>
         </TouchableOpacity>
       </View>
