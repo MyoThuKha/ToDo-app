@@ -25,8 +25,8 @@ const CreateTask: React.FC<createProps> = ({}) => {
         <Text style={{ ...styles.title, color: foreground }}>Your Task</Text>
       </View>
 
-      {/* input box */}
-      <View style={styles.inputBox}>
+      {/* input area */}
+      <View style={styles.inputArea}>
         <TextInput
           placeholder="Abc"
           multiline
@@ -47,7 +47,7 @@ const CreateTask: React.FC<createProps> = ({}) => {
         }}
       >
         {/* <AntDesign name="plus" size={24} color={background} /> */}
-        <Text>Add Task</Text>
+        <Text style={{ color: foreground, fontSize: 18 }}>Add Task</Text>
       </TouchableOpacity>
     </View>
   );
@@ -69,16 +69,16 @@ const styles = StyleSheet.create({
     ...globalStyle.display,
     paddingHorizontal: 8,
   },
-  inputBox: {
-    paddingHorizontal: 8,
-    paddingVertical: 12,
+  inputArea: {
+    flex: 1,
+    paddingHorizontal: 18,
+    paddingVertical: 24,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "white",
   },
   btn: {
-    paddingVertical: 12,
     alignItems: "center",
-    borderWidth: 1,
+    paddingVertical: 24,
   },
 });
