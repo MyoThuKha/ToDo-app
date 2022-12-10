@@ -2,7 +2,8 @@
   "expo": {
     "slug": "todo-app",
     "name": "todo-app",
-    "sdkVersion": "47.0.0"
+    "sdkVersion": "47.0.0",
+    "userInterfaceStyle": "automatic"
   },
   "name": "todo-app"
 }
