@@ -5,10 +5,15 @@ import { useSelector } from "react-redux";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AppBar from "../components/appBar";
 import globalStyle from "../styles/global";
+import { useColorScheme } from "react-native";
 
 // return "#f2eee9";
 
 const Home = ({ navigation }: { navigation: any }) => {
+  let color = useColorScheme();
+  if (color === "light") {
+  } else {
+  }
   const foreground: string = useSelector((state: any) => state.user.foreground);
   const background: string = useSelector((state: any) => state.user.background);
   const username: string = useSelector((state: any) => state.user.firstname);

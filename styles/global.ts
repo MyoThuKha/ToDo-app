@@ -13,5 +13,18 @@ const globalStyle = StyleSheet.create({
     bottom: 20,
     right: 24,
   },
+  lightTheme: {
+    color: "white",
+  },
+  darkTheme: {
+    color: "black",
+  },
+
+  lightThemeText: {
+    color: "black",
+  },
+  darkThemeText: {
+    color: "white",
+  },
 });
 export default globalStyle;
