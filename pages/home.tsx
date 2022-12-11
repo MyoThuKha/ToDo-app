@@ -40,8 +40,8 @@ const Home = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Add new text and work mode */}
         <View style={{ ...styles.btnSection, borderTopColor: frontColor }}>
+          {/* Add new text */}
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate("create")}
@@ -58,6 +58,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             style={{ ...styles.verticleLine, backgroundColor: frontColor }}
           ></View>
 
+          {/* Work mode */}
           <TouchableOpacity style={styles.btn}>
             <View style={styles.btnContent}>
               <MaterialIcons name="laptop" size={24} color={frontColor} />

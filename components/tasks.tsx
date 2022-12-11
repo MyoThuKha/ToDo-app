@@ -31,22 +31,10 @@ const Tasks: React.FC<dataProps> = ({}) => {
     <View style={[styles.section2]}>
       <Text style={[globalStyle.display, styles.title]}>Your Routine</Text>
       <View style={styles.total}>
-        <Text
-          style={{
-            borderRightWidth: 1,
-          }}
-        >
-          {tasks.length} Tasks
-        </Text>
+        <Text>{tasks.length} Tasks</Text>
+        <View></View>
         <TouchableOpacity onPress={() => changeCategory()}>
-          <Text
-            style={{
-              textTransform: "capitalize",
-              paddingRight: 8,
-            }}
-          >
-            {current}
-          </Text>
+          <Text style={{ textTransform: "capitalize" }}>{current}</Text>
         </TouchableOpacity>
       </View>
       <FlatList
@@ -59,7 +47,9 @@ const Tasks: React.FC<dataProps> = ({}) => {
                 style={styles.btn}
                 onPress={() => dispatch(deleteTask(item.key))}
               >
-                <Text style={{ fontSize: 12 }}>Mark as done</Text>
+                <Text style={{ fontSize: 12, color: "white" }}>
+                  Mark as done
+                </Text>
               </TouchableOpacity>
             </View>
           );
@@ -108,5 +98,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
+    backgroundColor: "black",
   },
 });

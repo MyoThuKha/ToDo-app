@@ -68,7 +68,7 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
           }}
         >
           {/* <AntDesign name="plus" size={24} color={background} /> */}
-          <Text style={{ color: frontColor, fontSize: 18 }}>Add Task</Text>
+          <Text style={{ color: frontColor, fontSize: 18 }}>Finish</Text>
         </TouchableOpacity>
       </View>
     </View>
