@@ -47,18 +47,19 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
             <Text style={{ ...styles.title, color: frontColor }}>
               Your Task
             </Text>
-            <AntDesign
-              name={impt ? "star" : "staro"}
-              size={24}
-              color={frontColor}
-              onPress={() => setImpt(() => !impt)}
-            />
+            <TouchableOpacity onPress={() => setImpt(() => !impt)}>
+              <AntDesign
+                name={impt ? "star" : "staro"}
+                size={24}
+                color={frontColor}
+              />
+            </TouchableOpacity>
           </View>
 
           {/* input area */}
           <View style={{ ...styles.mainBox, borderColor: frontColor }}>
             <TextInput
-              placeholder="Abc"
+              placeholder="Abc..."
               keyboardType="default"
               placeholderTextColor={frontColor}
               style={{ ...styles.input, color: frontColor }}
@@ -71,7 +72,9 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
                   navigation.pop();
                 }}
               >
-                <Text style={{ color: frontColor }}>Finish</Text>
+                <Text style={{ ...globalStyle.display, color: frontColor }}>
+                  Finish
+                </Text>
               </TouchableOpacity>
 
               <View
@@ -82,7 +85,9 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
               ></View>
 
               <TouchableOpacity onPress={() => navigation.pop()}>
-                <Text style={{ color: frontColor }}>Discard</Text>
+                <Text style={{ ...globalStyle.display, color: frontColor }}>
+                  Discard
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -110,7 +115,6 @@ const styles = StyleSheet.create({
   mainBox: {
     flex: 1,
     justifyContent: "space-between",
-    // paddingHorizontal: 18,
     paddingTop: 24,
     borderRadius: 12,
     borderWidth: 1,
