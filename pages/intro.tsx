@@ -3,8 +3,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar,
 } from "react-native";
-import { StatusBar } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateName } from "../datas/userReducer";
@@ -13,8 +13,6 @@ import { updateName } from "../datas/userReducer";
 
 const Intro = ({ navigation }: { navigation: any }) => {
   const username: string = useSelector((state: any) => state.user.firstname);
-  // const foreground: string = useSelector((state: any) => state.user.foreground);
-  // const background: string = useSelector((state: any) => state.user.background);
   const foreground = "black";
   const background = "white";
 

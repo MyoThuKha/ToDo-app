@@ -10,8 +10,6 @@ interface dataProps {}
 
 const Tasks: React.FC<dataProps> = ({}) => {
   const data = useSelector((state: any) => state.tasks.data);
-  const foreground = "white";
-  const background = "black";
   const dispatch = useDispatch();
 
   const [current, setCurrent] = useState("all");
@@ -35,7 +33,6 @@ const Tasks: React.FC<dataProps> = ({}) => {
       <View style={styles.total}>
         <Text
           style={{
-            borderRightColor: foreground,
             borderRightWidth: 1,
           }}
         >
@@ -46,7 +43,6 @@ const Tasks: React.FC<dataProps> = ({}) => {
             style={{
               textTransform: "capitalize",
               paddingRight: 8,
-              color: foreground,
             }}
           >
             {current}
@@ -58,16 +54,12 @@ const Tasks: React.FC<dataProps> = ({}) => {
         renderItem={({ item }: { item: { text: string; key: string } }) => {
           return (
             <View style={styles.item}>
-              <Text style={{ ...globalStyle.display, color: foreground }}>
-                {item.text}
-              </Text>
+              <Text style={globalStyle.display}>{item.text}</Text>
               <TouchableOpacity
-                style={[styles.done, { backgroundColor: background }]}
+                style={styles.btn}
                 onPress={() => dispatch(deleteTask(item.key))}
               >
-                <Text style={{ color: foreground, fontSize: 12 }}>
-                  Mark as done
-                </Text>
+                <Text style={{ fontSize: 12 }}>Mark as done</Text>
               </TouchableOpacity>
             </View>
           );
@@ -110,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  done: {
+  btn: {
     height: 38,
     width: 100,
     alignItems: "center",

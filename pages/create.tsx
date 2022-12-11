@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Text, StatusBar } from "react-native";
 import { TouchableOpacity, useColorScheme } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import globalStyle from "../styles/global";
 import { AntDesign } from "@expo/vector-icons";
 import { addTask } from "../datas/reducer";
