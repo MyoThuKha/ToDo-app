@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Text, StatusBar } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, useColorScheme } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import globalStyle from "../styles/global";
 import { AntDesign } from "@expo/vector-icons";
@@ -16,13 +16,10 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
   const dispatch = useDispatch();
   const inputRef = useRef("");
   const [impt, setImpt] = useState(false);
+  const colorTheme = useColorScheme();
 
-  const fgColor = useSelector(
-    (state: { user: { foreground: string } }) => state.user.foreground
-  );
-  const bgColor = useSelector(
-    (state: { user: { background: string } }) => state.user.background
-  );
+  const frontColor = colorTheme === "light" ? "black" : "white";
+  const backColor = colorTheme === "light" ? "white" : "black";
 
   const addTaskHandle = () => {
     if (inputRef.current !== "") {
@@ -31,8 +28,8 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={{ ...styles.container, backgroundColor: bgColor }}>
-      <AppBar />
+    <View style={{ ...styles.container, backgroundColor: backColor }}>
+      <AppBar frontColor={""} backColor={""} />
       <View style={styles.body}>
         <View
           style={{
@@ -41,22 +38,22 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ ...styles.title, color: fgColor }}>Your Task</Text>
+          <Text style={{ ...styles.title, color: frontColor }}>Your Task</Text>
           <AntDesign
             name={impt ? "star" : "staro"}
             size={24}
-            color={fgColor}
+            color={frontColor}
             onPress={() => setImpt(() => !impt)}
           />
         </View>
 
         {/* input area */}
-        <View style={styles.inputArea}>
+        <View style={{ ...styles.inputArea, borderColor: frontColor }}>
           <TextInput
             placeholder="Abc"
             multiline
-            placeholderTextColor={fgColor}
-            style={{ ...styles.input, color: fgColor }}
+            placeholderTextColor={frontColor}
+            style={{ ...styles.input, color: frontColor }}
             onChangeText={(val) => (inputRef.current = val)}
           />
         </View>
@@ -64,14 +61,14 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
         {/* submit Button */}
         <TouchableOpacity
           // style={{ ...globalstyles.btn, backgroundColor: foreground }}
-          style={{ ...styles.btn, borderColor: fgColor }}
+          style={{ ...styles.btn, borderColor: frontColor }}
           onPress={() => {
             addTaskHandle();
             navigation.pop();
           }}
         >
           {/* <AntDesign name="plus" size={24} color={background} /> */}
-          <Text style={{ color: fgColor, fontSize: 18 }}>Add Task</Text>
+          <Text style={{ color: frontColor, fontSize: 18 }}>Add Task</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -101,9 +98,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 18,
     paddingVertical: 24,
-    borderRadius: 30,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: "white",
   },
   btn: {
     alignItems: "center",

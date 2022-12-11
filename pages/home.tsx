@@ -11,16 +11,14 @@ import { useColorScheme } from "react-native";
 
 const Home = ({ navigation }: { navigation: any }) => {
   let color = useColorScheme();
-  if (color === "light") {
-  } else {
-  }
-  const foreground: string = useSelector((state: any) => state.user.foreground);
-  const background: string = useSelector((state: any) => state.user.background);
+  const frontColor = color === "light" ? "black" : "white";
+  const backColor = color === "light" ? "#f2eee9" : "black";
+
   const username: string = useSelector((state: any) => state.user.firstname);
   return (
-    <View style={{ ...styles.container, backgroundColor: background }}>
+    <View style={{ ...styles.container, backgroundColor: backColor }}>
       {/* app bar */}
-      <AppBar />
+      <AppBar frontColor={frontColor} backColor={backColor} />
 
       {/* middle Section */}
       <View style={styles.section1}>
@@ -29,41 +27,41 @@ const Home = ({ navigation }: { navigation: any }) => {
             style={[
               globalStyle.display,
               styles.mainText,
-              { color: foreground },
+              { color: frontColor },
             ]}
           >
             rise and{"\n"}shine, {username}!{"\n"}how are you feeling{"\n"}
             today?
           </Text>
           <TouchableOpacity
-            style={{ ...globalStyle.goTo, backgroundColor: foreground }}
+            style={{ ...globalStyle.goTo, backgroundColor: frontColor }}
           >
-            <AntDesign name="arrowright" size={24} color={background} />
+            <AntDesign name="arrowright" size={24} color={backColor} />
           </TouchableOpacity>
         </View>
 
         {/* Add new text and work mode */}
-        <View style={{ ...styles.btnSection, borderTopColor: foreground }}>
+        <View style={{ ...styles.btnSection, borderTopColor: frontColor }}>
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate("create")}
           >
             <View style={styles.btnContent}>
-              <AntDesign name="plus" size={24} color={foreground} />
-              <Text style={{ ...styles.btnText, color: foreground }}>
+              <AntDesign name="plus" size={24} color={frontColor} />
+              <Text style={{ ...styles.btnText, color: frontColor }}>
                 add new task
               </Text>
             </View>
           </TouchableOpacity>
 
           <View
-            style={{ ...styles.verticleLine, backgroundColor: foreground }}
+            style={{ ...styles.verticleLine, backgroundColor: frontColor }}
           ></View>
 
           <TouchableOpacity style={styles.btn}>
             <View style={styles.btnContent}>
-              <MaterialIcons name="laptop" size={24} color={foreground} />
-              <Text style={{ ...styles.btnText, color: foreground }}>
+              <MaterialIcons name="laptop" size={24} color={frontColor} />
+              <Text style={{ ...styles.btnText, color: frontColor }}>
                 Work mode
               </Text>
             </View>

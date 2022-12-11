@@ -6,16 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteTask } from "../datas/reducer";
 import globalStyle from "../styles/global";
 
-interface dataProps {
-  text: string;
-  important: boolean;
-  key: string;
-}
+interface dataProps {}
 
-const Tasks: React.FC = ({}) => {
+const Tasks: React.FC<dataProps> = ({}) => {
   const data = useSelector((state: any) => state.tasks.data);
-  const foreground = useSelector((state: any) => state.user.foreground);
-  const background = useSelector((state: any) => state.user.background);
+  const foreground = "white";
+  const background = "black";
   const dispatch = useDispatch();
 
   const [current, setCurrent] = useState("all");
@@ -34,16 +30,25 @@ const Tasks: React.FC = ({}) => {
   };
 
   return (
-    <View style={[styles.section2, { backgroundColor: foreground }]}>
-      <Text style={{ ...globalStyle.display, ...styles.title }}>
-        Your Routine
-      </Text>
+    <View style={[styles.section2]}>
+      <Text style={[globalStyle.display, styles.title]}>Your Routine</Text>
       <View style={styles.total}>
-        <Text style={{ borderRightColor: foreground, borderRightWidth: 1 }}>
+        <Text
+          style={{
+            borderRightColor: foreground,
+            borderRightWidth: 1,
+          }}
+        >
           {tasks.length} Tasks
         </Text>
         <TouchableOpacity onPress={() => changeCategory()}>
-          <Text style={{ textTransform: "capitalize", paddingRight: 8 }}>
+          <Text
+            style={{
+              textTransform: "capitalize",
+              paddingRight: 8,
+              color: foreground,
+            }}
+          >
             {current}
           </Text>
         </TouchableOpacity>
@@ -53,7 +58,9 @@ const Tasks: React.FC = ({}) => {
         renderItem={({ item }: { item: { text: string; key: string } }) => {
           return (
             <View style={styles.item}>
-              <Text style={globalStyle.display}>{item.text}</Text>
+              <Text style={{ ...globalStyle.display, color: foreground }}>
+                {item.text}
+              </Text>
               <TouchableOpacity
                 style={[styles.done, { backgroundColor: background }]}
                 onPress={() => dispatch(deleteTask(item.key))}
@@ -73,6 +80,7 @@ export default Tasks;
 
 const styles = StyleSheet.create({
   section2: {
+    backgroundColor: "white",
     paddingHorizontal: 20,
     paddingVertical: 24,
     flex: 4,

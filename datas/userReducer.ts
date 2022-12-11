@@ -4,8 +4,6 @@ const initialState = {
   firstname: "Myo",
   secondname: "Thu",
   profile: 1,
-  background: "black",
-  foreground: "white",
 };
 
 const user = createSlice({

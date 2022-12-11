@@ -4,10 +4,12 @@ import { StatusBar, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import globalStyle from "../styles/global";
 
-interface appBarProps {}
+interface appBarProps {
+  frontColor: string;
+  backColor: string;
+}
 
-const AppBar: React.FC<appBarProps> = ({}) => {
-  const foreground: string = useSelector((state: any) => state.user.foreground);
+const AppBar: React.FC<appBarProps> = ({ frontColor, backColor }) => {
   const date = new Date();
 
   const [day, month, dateOfMonth] = [
@@ -17,20 +19,26 @@ const AppBar: React.FC<appBarProps> = ({}) => {
   ];
 
   return (
-    <View style={{ ...styles.header, borderBottomColor: foreground }}>
+    <View
+      style={{
+        ...styles.header,
+        backgroundColor: backColor,
+        borderBottomColor: frontColor,
+      }}
+    >
       <View>
         <Text
-          style={[globalStyle.display, styles.today, { color: foreground }]}
+          style={[globalStyle.display, styles.today, { color: frontColor }]}
         >
           Today
         </Text>
-        <Text style={[globalStyle.display, styles.date, { color: foreground }]}>
+        <Text style={[globalStyle.display, styles.date, { color: frontColor }]}>
           {/* Friday, Oct 8 */}
-          {day + ", " + month + " " + dateOfMonth}
+          {day + "," + " " + month + " " + dateOfMonth}
         </Text>
       </View>
       {/* <View style={styles.profile}></View> */}
-      {<Text style={{ color: foreground }}>{moment().format("LT")}</Text>}
+      {<Text style={{ color: frontColor }}>{moment().format("LT")}</Text>}
     </View>
   );
 };
