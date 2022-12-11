@@ -55,7 +55,7 @@ const Home = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
 
           <View
-            style={{ ...styles.verticleLine, backgroundColor: frontColor }}
+            style={{ ...globalStyle.verticleLine, backgroundColor: frontColor }}
           ></View>
 
           {/* Work mode */}
@@ -112,10 +112,6 @@ const styles = StyleSheet.create({
   btnText: {
     textTransform: "capitalize",
     paddingLeft: 5,
-  },
-  verticleLine: {
-    height: "100%",
-    width: 1,
   },
 });
 

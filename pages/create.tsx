@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Text, StatusBar } from "react-native";
-import { TouchableOpacity, useColorScheme } from "react-native";
+import {
+  TouchableOpacity,
+  useColorScheme,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { useDispatch } from "react-redux";
 import globalStyle from "../styles/global";
 import { AntDesign } from "@expo/vector-icons";
@@ -28,50 +33,62 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={{ ...styles.container, backgroundColor: backColor }}>
-      <AppBar frontColor={""} backColor={""} />
-      <View style={styles.body}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ ...styles.title, color: frontColor }}>Your Task</Text>
-          <AntDesign
-            name={impt ? "star" : "staro"}
-            size={24}
-            color={frontColor}
-            onPress={() => setImpt(() => !impt)}
-          />
-        </View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={{ ...styles.container, backgroundColor: backColor }}>
+        <AppBar frontColor={""} backColor={""} />
+        <View style={styles.body}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ ...styles.title, color: frontColor }}>
+              Your Task
+            </Text>
+            <AntDesign
+              name={impt ? "star" : "staro"}
+              size={24}
+              color={frontColor}
+              onPress={() => setImpt(() => !impt)}
+            />
+          </View>
 
-        {/* input area */}
-        <View style={{ ...styles.inputArea, borderColor: frontColor }}>
-          <TextInput
-            placeholder="Abc"
-            multiline
-            placeholderTextColor={frontColor}
-            style={{ ...styles.input, color: frontColor }}
-            onChangeText={(val) => (inputRef.current = val)}
-          />
-        </View>
+          {/* input area */}
+          <View style={{ ...styles.mainBox, borderColor: frontColor }}>
+            <TextInput
+              placeholder="Abc"
+              keyboardType="default"
+              placeholderTextColor={frontColor}
+              style={{ ...styles.input, color: frontColor }}
+              onChangeText={(val) => (inputRef.current = val)}
+            />
+            <View style={styles.btnSection}>
+              <TouchableOpacity
+                onPress={() => {
+                  addTaskHandle();
+                  navigation.pop();
+                }}
+              >
+                <Text style={{ color: frontColor }}>Finish</Text>
+              </TouchableOpacity>
 
-        {/* submit Button */}
-        <TouchableOpacity
-          // style={{ ...globalstyles.btn, backgroundColor: foreground }}
-          style={{ ...styles.btn, borderColor: frontColor }}
-          onPress={() => {
-            addTaskHandle();
-            navigation.pop();
-          }}
-        >
-          {/* <AntDesign name="plus" size={24} color={background} /> */}
-          <Text style={{ color: frontColor, fontSize: 18 }}>Finish</Text>
-        </TouchableOpacity>
+              <View
+                style={{
+                  ...globalStyle.verticleLine,
+                  backgroundColor: frontColor,
+                }}
+              ></View>
+
+              <TouchableOpacity onPress={() => navigation.pop()}>
+                <Text style={{ color: frontColor }}>Discard</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 export default CreateTask;
@@ -89,20 +106,26 @@ const styles = StyleSheet.create({
     ...globalStyle.display,
     paddingVertical: 16,
   },
+
+  mainBox: {
+    flex: 1,
+    justifyContent: "space-between",
+    // paddingHorizontal: 18,
+    paddingTop: 24,
+    borderRadius: 12,
+    borderWidth: 1,
+    marginBottom: 24,
+  },
   input: {
     fontSize: 16,
     ...globalStyle.display,
-    paddingHorizontal: 8,
-  },
-  inputArea: {
-    flex: 1,
     paddingHorizontal: 18,
-    paddingVertical: 24,
-    borderRadius: 12,
-    borderWidth: 1,
   },
-  btn: {
+  btnSection: {
+    height: 58,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    paddingVertical: 24,
+    borderTopWidth: 1,
   },
 });

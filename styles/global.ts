@@ -13,18 +13,9 @@ const globalStyle = StyleSheet.create({
     bottom: 20,
     right: 24,
   },
-  lightTheme: {
-    color: "white",
-  },
-  darkTheme: {
-    color: "black",
-  },
-
-  lightThemeText: {
-    color: "black",
-  },
-  darkThemeText: {
-    color: "white",
+  verticleLine: {
+    height: "100%",
+    width: 1,
   },
 });
 export default globalStyle;

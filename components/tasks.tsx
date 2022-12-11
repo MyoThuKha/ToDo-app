@@ -32,7 +32,6 @@ const Tasks: React.FC<dataProps> = ({}) => {
       <Text style={[globalStyle.display, styles.title]}>Your Routine</Text>
       <View style={styles.total}>
         <Text>{tasks.length} Tasks</Text>
-        <View></View>
         <TouchableOpacity onPress={() => changeCategory()}>
           <Text style={{ textTransform: "capitalize" }}>{current}</Text>
         </TouchableOpacity>
@@ -42,15 +41,19 @@ const Tasks: React.FC<dataProps> = ({}) => {
         renderItem={({ item }: { item: { text: string; key: string } }) => {
           return (
             <View style={styles.item}>
-              <Text style={globalStyle.display}>{item.text}</Text>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={() => dispatch(deleteTask(item.key))}
-              >
-                <Text style={{ fontSize: 12, color: "white" }}>
-                  Mark as done
-                </Text>
-              </TouchableOpacity>
+              <Text style={{ ...globalStyle.display, flex: 1 }}>
+                {item.text}
+              </Text>
+              <View style={{ flex: 1, alignItems: "flex-end" }}>
+                <TouchableOpacity
+                  style={styles.btn}
+                  onPress={() => dispatch(deleteTask(item.key))}
+                >
+                  <Text style={{ fontSize: 12, color: "white" }}>
+                    Mark as done
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           );
         }}
@@ -85,12 +88,13 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    paddingVertical: 32,
-    borderBottomColor: "#d1d1d1",
-    borderBottomWidth: 1,
+    flex: 1,
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#d1d1d1",
+    paddingVertical: 32,
   },
   btn: {
     height: 38,
