@@ -6,6 +6,8 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AppBar from "../components/appBar";
 import globalStyle from "../styles/global";
 import { useColorScheme } from "react-native";
+import moment from "moment";
+import { useCallback } from "react";
 
 // return "#f2eee9";
 
@@ -13,6 +15,21 @@ const Home = ({ navigation }: { navigation: any }) => {
   let color = useColorScheme();
   const frontColor = color === "light" ? "black" : "white";
   const backColor = color === "light" ? "#f2eee9" : "black";
+
+  const greetUser = useCallback((name: string): string => {
+    var currentHour = parseInt(moment().format("HH"));
+    if (currentHour >= 3 && currentHour < 12) {
+      return `rise and${"\n"}shine, ${name}!${"\n"}how are you feeling${"\n"}today?`;
+    } else if (currentHour >= 12 && currentHour < 15) {
+      return `Good${"\n"}Siesta, ${name}!${"\n"}how are you feeling${"\n"}today?`;
+    } else if (currentHour >= 15 && currentHour < 20) {
+      return `Good${"\n"}Evening, ${name}!${"\n"}how are you feeling${"\n"}today?`;
+    } else if (currentHour >= 20 && currentHour < 3) {
+      return `Beautiful${"\n"}Night, ${name}!${"\n"}how are you feeling${"\n"}today?`;
+    } else {
+      return "Hello";
+    }
+  }, []);
 
   const username: string = useSelector((state: any) => state.user.firstname);
   return (
@@ -30,8 +47,7 @@ const Home = ({ navigation }: { navigation: any }) => {
               { color: frontColor },
             ]}
           >
-            rise and{"\n"}shine, {username}!{"\n"}how are you feeling{"\n"}
-            today?
+            {greetUser(username)}
           </Text>
           <TouchableOpacity
             style={{ ...globalStyle.goTo, backgroundColor: frontColor }}
@@ -58,12 +74,12 @@ const Home = ({ navigation }: { navigation: any }) => {
             style={{ ...globalStyle.verticleLine, backgroundColor: frontColor }}
           ></View>
 
-          {/* Work mode */}
+          {/* Logout (to implement) */}
           <TouchableOpacity style={styles.btn}>
             <View style={styles.btnContent}>
-              <MaterialIcons name="laptop" size={24} color={frontColor} />
+              <AntDesign name="logout" size={24} color={frontColor} />
               <Text style={{ ...styles.btnText, color: frontColor }}>
-                Work mode
+                Log Out
               </Text>
             </View>
           </TouchableOpacity>
