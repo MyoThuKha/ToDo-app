@@ -7,7 +7,7 @@ import AppBar from "../components/appBar";
 import globalStyle from "../styles/global";
 import { useColorScheme } from "react-native";
 import moment from "moment";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 // return "#f2eee9";
 
@@ -27,7 +27,7 @@ const Home = ({ navigation }: { navigation: any }) => {
     } else if (currentHour >= 20 && currentHour < 3) {
       return `Beautiful${"\n"}Night, ${name}!${"\n"}how are you feeling${"\n"}today?`;
     } else {
-      return "Hello";
+      return `Hello, ${name}!${"\n"}how are you feeling${"\n"}today?`;
     }
   }, []);
 
@@ -35,7 +35,7 @@ const Home = ({ navigation }: { navigation: any }) => {
   return (
     <View style={{ ...styles.container, backgroundColor: backColor }}>
       {/* app bar */}
-      <AppBar frontColor={frontColor} backColor={backColor} />
+      <AppBar frontColor={frontColor} backColor={backColor} title={"Home"} />
 
       {/* middle Section */}
       <View style={styles.section1}>

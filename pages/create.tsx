@@ -24,18 +24,23 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
   const colorTheme = useColorScheme();
 
   const frontColor = colorTheme === "light" ? "black" : "white";
-  const backColor = colorTheme === "light" ? "white" : "black";
+  const backColor = colorTheme === "light" ? "#f2eee9" : "black";
 
   const addTaskHandle = () => {
     if (inputRef.current !== "") {
       dispatch(addTask({ text: inputRef.current, important: impt }));
     }
   };
+  const title: string = impt ? "Important" : "Your Task";
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={{ ...styles.container, backgroundColor: backColor }}>
-        <AppBar frontColor={""} backColor={""} />
+        <AppBar
+          frontColor={frontColor}
+          backColor={backColor}
+          title={"Create"}
+        />
         <View style={styles.body}>
           <View
             style={{
@@ -44,9 +49,7 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-            <Text style={{ ...styles.title, color: frontColor }}>
-              Your Task
-            </Text>
+            <Text style={{ ...styles.title, color: frontColor }}>{title}</Text>
             <TouchableOpacity onPress={() => setImpt(() => !impt)}>
               <AntDesign
                 name={impt ? "star" : "staro"}
@@ -69,7 +72,7 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => {
                   addTaskHandle();
-                  navigation.pop();
+                  navigation.goBack();
                 }}
               >
                 <Text style={{ ...globalStyle.display, color: frontColor }}>
@@ -84,7 +87,7 @@ const CreateTask: React.FC<createProps> = ({ navigation }) => {
                 }}
               ></View>
 
-              <TouchableOpacity onPress={() => navigation.pop()}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Text style={{ ...globalStyle.display, color: frontColor }}>
                   Discard
                 </Text>
@@ -116,14 +119,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     paddingTop: 24,
-    borderRadius: 12,
+    borderRadius: 24,
     borderWidth: 1,
     marginBottom: 24,
   },
   input: {
     fontSize: 16,
     ...globalStyle.display,
-    paddingHorizontal: 18,
+    paddingHorizontal: 24,
   },
   btnSection: {
     height: 58,

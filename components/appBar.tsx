@@ -1,15 +1,16 @@
 import moment from "moment";
 import React from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { StyleSheet, Text, View } from "react-native";
 import globalStyle from "../styles/global";
+import { useState, useEffect } from "react";
 
 interface appBarProps {
   frontColor: string;
   backColor: string;
+  title: string;
 }
 
-const AppBar: React.FC<appBarProps> = ({ frontColor, backColor }) => {
+const AppBar: React.FC<appBarProps> = ({ frontColor, backColor, title }) => {
   const date = new Date();
 
   const [day, month, dateOfMonth] = [
@@ -17,6 +18,13 @@ const AppBar: React.FC<appBarProps> = ({ frontColor, backColor }) => {
     moment().format("MMM"),
     date.getDate(),
   ];
+  // const [time, setTime] = useState(moment().format("LT"));
+  // useEffect(() => {
+  //   setTime(moment().format("LT"));
+  //   return navigation.addListener("focus", () => {
+  //     setTime(moment().format("LT"));
+  //   });
+  // }, []);
 
   return (
     <View
@@ -38,7 +46,7 @@ const AppBar: React.FC<appBarProps> = ({ frontColor, backColor }) => {
         </Text>
       </View>
       {/* <View style={styles.profile}></View> */}
-      {<Text style={{ color: frontColor }}>{moment().format("LT")}</Text>}
+      {<Text style={{ color: frontColor }}>{title}</Text>}
     </View>
   );
 };

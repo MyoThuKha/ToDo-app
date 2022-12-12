@@ -87,7 +87,7 @@ const Tasks: React.FC<dataProps> = ({}) => {
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <Text style={{ ...globalStyle.display, fontSize: 16 }}>
-            There is no Tasks to Finish.
+            There is no Tasks to Do.
           </Text>
         </View>
       ) : (
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 4,
-    paddingVertical: 12,
+    paddingVertical: 14,
   },
 
   title: {
