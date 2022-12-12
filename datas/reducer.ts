@@ -40,8 +40,11 @@ const tasksReducer = createSlice({
       const result = state.data.filter((each) => each.key !== key);
       state.data = result;
     },
+    deleteAll: (state) => {
+      state.data = [];
+    },
   },
 });
 
-export const { addTask, deleteTask } = tasksReducer.actions;
+export const { addTask, deleteTask, deleteAll } = tasksReducer.actions;
 export default tasksReducer.reducer;
