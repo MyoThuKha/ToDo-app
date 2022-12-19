@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import taskReducer from "./reducer";
 import userReducer from "./userReducer";
 import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
 
 const persistConfig = {
   key: "root",
@@ -16,6 +17,7 @@ const store = configureStore({
     tasks: persistTasks,
     user: persistUser,
   },
+  middleware: [thunk],
 });
 
 export default store;
