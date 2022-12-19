@@ -1,20 +1,22 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from "@reduxjs/toolkit";
-// import persistReducer from "redux-persist/es/persistReducer";
 import taskReducer from "./reducer";
 import userReducer from "./userReducer";
+import { persistReducer, persistStore } from "redux-persist";
 
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
 };
 
-// const persistData = persistReducer(persistConfig, taskReducer);
+const persistTasks = persistReducer(persistConfig, taskReducer);
+const persistUser = persistReducer(persistConfig, userReducer);
 const store = configureStore({
   reducer: {
-    tasks: taskReducer,
-    user: userReducer,
+    tasks: persistTasks,
+    user: persistUser,
   },
 });
 
 export default store;
+export const persistor = persistStore(store);
